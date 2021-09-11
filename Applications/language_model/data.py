@@ -20,6 +20,8 @@ class Corpus:
     def __init__(self, path):
         self.dictionary = Dictionary()
         self.train = self.tokenize(os.path.join(path, 'train.txt'))
+        self.valid = self.tokenize(os.path.join(path, 'valid.txt'))
+        self.test = self.tokenize(os.path.join(path, 'test.txt'))
 
 
     def tokenize(self, file_path):
@@ -43,3 +45,5 @@ class Corpus:
 if __name__ == '__main__':
     c = Corpus('../../data/wikitext-2')
     print(c.train.shape)
+    print(c.valid.shape)
+    print(c.test.shape)
