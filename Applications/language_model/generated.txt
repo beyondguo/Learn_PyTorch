@@ -1,0 +1,119 @@
+and @mentions
+ <eos>       <div class="d-flex flex-items-center">
+ <eos>       
+ <span data-view-component="true" class="progress-pjax-loader js-pjax-loader-bar Progress position-fixed width-full">
+ <eos>     <span style="background-color: #79b8ff;width: 0%;" data-view-component="true" class="Progress-item progress-pjax-loader-bar"></span>
+
+<eos> width-full">
+ <eos>       
+ <eos> <div class="SelectMenu">
+ <eos>   <nav data-pjax="#js-repo-pjax-container" mr-0 mr-md-3
+flex-order-1 mr-md-3 site-scoped-search data-hotkey="g p" data-ga-click="Header, mr-0 mr-md-3 data-selected-links="/explore overflow-hidden data-hotkey="g s" color-text-secondary d-inline-block wb-break-all"><a data-pjax="#repo-content-pjax-container" href="/pytorch/examples"><span>examples</span></a></span></span><span class="separator">/</span><span class="js-path-segment d-inline-block
+wb-break-all"><a data-pjax="#repo-content-pjax-container" href="/pytorch/examples/tree/master/word_language_model/data"><span>data</span></a></span><span class="separator">/</span><span class="js-path-segment d-inline-block wb-break-all"><a data-pjax="#repo-content-pjax-container" href="/pytorch/examples/tree/master/word_language_model/data/wikitext-2"><span>wikitext-2</span></a></span><span href="/pytorch/examples"><span>examples</span></a></span></span><span class="separator">/</span><span class="js-path-segment d-inline-block wb-break-all"><a data-pjax="#repo-content-pjax-container" href="/pytorch/examples/tree/master/word_language_model"><span>word_language_model</span></a></span><span class="separator">/</span><span class="js-path-segment d-inline-block wb-break-all"><a
+data-pjax="#repo-content-pjax-container" href="/pytorch/examples/tree/master/word_language_model/data/wikitext-2"><span>wikitext-2</span></a></span><span class="separator">/</span><strong class="final-path">train.txt</strong>
+ <eos>       <li><a type="hidden" 6L8 15.1h-.9L10.8 GitHub, href="https://github.com/about">About</a></li>
+ <eos>  
+  <span className="text-small color-text-secondary text-normal pb-1">
+ <eos>            
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-issue-opened UnderlineNav-octicon d-none d-sm-inline">
+ <eos>  
+  <path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0
+01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.042.139L1.255 2.24 1.279l-3.046 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01-1.263-2.36l1.703-2.554A.25.25 0
+01-.249-.225l-.66-6.6z"></path>
+ <eos> </svg>
+ <eos> 
+ <eos>         <span data-content="Pull requests">Pull requests</span>
+ <eos> 
+             <span class="markdown-title">
+ <eos>    
+          <span class="flex-auto">Copy permalink</span>
+ <eos>      
+          p-responsive" <eos>        
+        <li aria-label="Close hidden>
+ <eos>        
+              <div class="f5 text-bold">
+ <eos>  
+                   
+  file, class="f5 perform <eos>              
+      <p class="text-center mt-3" data-hide-on-error>
+ <eos>         
+ 
+ <eos>             
+ <eos>   
+         
+ <eos>         
+   Ignore
+ <eos> 
+ <eos>             
+ 
+ <eos> 
+ <eos>             </div>
+ <eos> 
+
+<eos>   <div class="Box-header hx_commit-tease position-absolute" class="d-flex flex-column flex-auto overflow-auto" tabindex="" hidden>
+ <eos>      
+    type="submit"
+ <eos>           <h3 class="Box-title">
+ <eos> 
+       integrity="sha512-bhezu6Byy77IyhYpoQ0673g8ZoqrBB033b+aJy9z7i24+X7SM/kw44++OQGSRWyzq/kQk68k+nR9HrUcRX8QTg==" <eos>     
+ <eos>     </button>
+
+<eos> 
+ <eos>         id="context-commitish-filter-field"
+ <eos>       
+   js-jump-to-suggestion-avatar <eos>           </header>
+ <eos> 
+ <eos> 
+       <a class="avatar-link" data-hovercard-type="user" data-hovercard-url="/users/Smerity/hovercard" data-octo-click="hovercard-link-click" data-octo-dimensions="link_type:self" href="/pytorch/examples/commits/master/word_language_model/data/wikitext-2/train.txt?author=Smerity">
+ <eos>     
+   <p class="form-control flex-auto mr-3 linejump-input js-jump-to-line-field" type="text" placeholder="Jump to message">
+ <eos>      
+
+ <eos>         <span data-content="Projects">Projects</span>
+ <eos>       
+       <span class="sr-only">More</span>
+ <eos>          
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-issue-opened UnderlineNav-octicon d-none
+d-sm-inline">
+ <eos>     <path fill-rule="evenodd" d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0
+010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z"></path>
+ <eos> </svg>
+ <eos>     
+ <span class="js-stale-session-flash-signed-in" hidden>You signed in with tab or window. <a href="">Reload</a> to refresh your session.</span>
+ <eos>   </div>
+
+<eos>     <div class="Box-header">
+ <eos>         href="https://services.github.com" <eos>  
+      All GitHub
+ <eos>     aria-label="Homepage "
+ <eos>    
+  aria-label="Homepage "
+ <eos>     >
+ <eos>     <span class="js-jump-to-badge-search-text-global d-none" aria-label="in all
+of GitHub">
+ <eos>         All GitHub
+ <eos>     </span>
+ <eos>
+    "
+ <eos>       data-ga-click="Repository, open with desktop">
+ <eos>   
+             role="menuitemradio"
+ <eos>     
+       "
+ <eos>           name="do"
+
+<eos>           </include-fragment>
+ <eos>       class="Header-link
+branches m-0 py-2 target="_blank" "
+ <eos>              
+    data-hydro-click="{&quot;event_type&quot;:&quot;repository.click&quot;,&quot;payload&quot;:{&quot;target&quot;:&quot;FORK_BUTTON&quot;,&quot;repository_id&quot;:66424871,&quot;originating_url&quot;:&quot;https://github.com/pytorch/examples/blob/master/word_language_model/data/wikitext-2/train.txt&quot;,&quot;user_id&quot;:37113676}}" and ml-n1 data-ga-click="Repository, with aria-hidden="true">T</span>
+ <eos>         
+             Issues
+ <eos> </a>    
+           </li>
+ <eos>       
+       </details>
+ <eos>           
+ aria-checked="false"
+ <eos>               Custom
+ <eos> 

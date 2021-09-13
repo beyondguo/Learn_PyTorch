@@ -29,7 +29,7 @@ parser.add_argument('--epochs', type=int, default=40,
 parser.add_argument('--batch_size', type=int, default=20, metavar='N',
                     help='batch size')
 parser.add_argument('--bptt', type=int, default=35,
-                    help='sequence length')
+                    help='sequence length, backprop through time(bptt)')
 parser.add_argument('--dropout', type=float, default=0.2,
                     help='dropout applied to layers (0 = no dropout)')
 parser.add_argument('--tied', action='store_true',
@@ -84,6 +84,7 @@ batch processing.
 """
 
 def batchify(data, bsz):
+    """按照batch size来分割文本，所以bsz越大，用于训练的每条文本就越短"""
     nbatch = data.shape[0] // bsz
     data = data.narrow(0, 0, nbatch * bsz)  # 剪裁，(dimension, start, length)
     data = data.view(bsz, -1).t().contiguous()  # 这里的转置是为了满足RNN的输入，把seq_len放在第一维
@@ -112,31 +113,46 @@ loss_func = nn.NLLLoss()
 
 """
 get_batch subdivides the source data into chunks of length args.bptt.
-If source is equal to the example output of the batchify function, with
-a bptt-limit of 2, we'd get the following two Variables for i = 0:
+If source is equal to the example output of the batchify function, 
+┌ a g m s ┐
+│ b h n t │
+│ c i o u │
+│ d j p v │
+│ e k q w │
+└ f l r x ┘.
+with a bptt-limit of 2, we'd get the following two Variables for i = 0:
 ┌ a g m s ┐ ┌ b h n t ┐
 └ b h n t ┘ └ c i o u ┘
 Note that despite the name of the function, the subdivison of data is not
 done along the batch dimension (i.e. dimension 1), since that was handled
 by the batchify function. The chunks are along dimension 0, corresponding
 to the seq_len dimension in the LSTM.
-这一大段，我还不是很明白要干嘛，先贴过来吧
+
+就是说，原本在没有seq_len的限制下，就是上面第一个矩阵，然后有了seq_len之后，应该去划分
+一个个的输入呢，就是按照seq_len去纵向滑动，得到一个个chunk.
 """
 
 def get_batch(source, i):
-    """从source中第i位置开始取出seq_len长度的数据"""
+    """
+    从source中第i位置开始取出seq_len长度的数据。
+    首先source data已经有了batch维，这里就是按照seq_len做一个切片；
+    然后target这里的都往后挪一个index，这实际上就是一个batch的所有target，
+    最后需要view(-1)变形成一维的，这样才能直接输入到NLLLoss损失函数中。
+    """
     seq_len = min(args.bptt, len(source) - 1 - i)
     data = source[i:i+seq_len]
     target = source[i+1:i+1+seq_len].view(-1)
     return data, target
 
-def repackage_hidden(h):
-    """Wraps hidden states in new Tensors, to detach them from their history."""
-
+def repackage_hidden(h):  # 这个玩意儿到底干嘛的？
+    """Wraps hidden states in new Tensors, to detach them from their history.
+    在网上查了查，相关的解释可以参考：
+    https://discuss.pytorch.org/t/solved-why-we-need-to-detach-variable-which-contains-hidden-representation/1426
+    """
     if isinstance(h, torch.Tensor):
         return h.detach()
     else:
-        return tuple(repackage_hidden(v) for v in h)
+        return tuple(repackage_hidden(v) for v in h)  # 还是个递归函数，更不懂了
 
 def evaluate(data_source):
     # Turn on evaluation mode which disables dropout.
@@ -144,7 +160,7 @@ def evaluate(data_source):
     model.eval()
     total_loss = 0.
     ntokens = len(corpus.dictionary)
-    if args.model != 'Transformer':
+    if args.model != 'Transformer':  # 不是Transformer，就有hidden的概念
         hidden = model.init_hidden(eval_batch_size)
     with torch.no_grad():
         for i in range(0, data_source.size(0) - 1, args.bptt):  # 每bptt的
@@ -162,13 +178,18 @@ def evaluate(data_source):
 def train():
     # Turn on training mode which enables dropout.
     model.train()
-    total_loss = 0.
+    total_loss = 0.  # 记录一个epoch的loss
     start_time = time.time()
     ntokens = len(corpus.dictionary)
     if args.model != 'Transformer':
         hidden = model.init_hidden(args.batch_size)
     for batch, i in enumerate(range(0, train_data.size(0) - 1, args.bptt)):
-        data, targets = get_batch(train_data, i)
+        """
+        这里的设计也是挺"奇特的"。不管bptt多大，这里一个迭代都是batch size大小的数据；
+        i是一系列间隔seq_len的值，
+        所以bptt的作用就是告诉get_batch函数我一个batch中的文本是多长。
+        """
+        data, targets = get_batch(train_data, i)  # 以seqlen来取一个个batch
         # Starting each batch, we detach the hidden state from how it was previously produced.
         # If we didn't, the model would try backpropagating all the way to start of the dataset.
         model.zero_grad()
@@ -177,13 +198,14 @@ def train():
             output = output.view(-1, ntokens)
         else:
             hidden = repackage_hidden(hidden)
+            # 每一次新的反向传播，都得先把hidden给清理一次
             output, hidden = model(data, hidden)
         loss = loss_func(output, targets)
         loss.backward()
 
         # `clip_grad_norm` helps prevent the exploding gradient problem in RNNs / LSTMs.
         torch.nn.utils.clip_grad_norm_(model.parameters(), args.clip)
-        for p in model.parameters():
+        for p in model.parameters():  # 为啥不用optim？？
             p.data.add_(p.grad, alpha=-lr)
 
         total_loss += loss.item()

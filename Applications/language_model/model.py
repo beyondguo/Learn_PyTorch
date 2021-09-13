@@ -7,7 +7,7 @@ class RNN_Model(nn.Module):
     def __init__(self, rnn_type, ntoken, ninp, nhid, nlayers, dropout=0.5, tie_weights=False):
         """
         :param rnn_type:
-        :param ntoken: num of tokens, sequence length
+        :param ntoken: num of tokens, vocab size
         :param ninp: dimension of input tokens
         :param nhid: hidden size
         :param nlayers: num of layers
@@ -30,6 +30,7 @@ class RNN_Model(nn.Module):
                 raise ValueError("""only support ['LSTM', 'GRU', 'RNN_TANH' or 'RNN_RELU']""")
             self.rnn = nn.RNN(ninp, nhid, nlayers, nonlinearity=self.nonlinearity, dropout=dropout)
         # decoder, a simple linear layer:
+        # ntoken就是vocab size，所以输出维度要这么定。实际上，训练LM，就是next word prediction
         self.decoder = nn.Linear(in_features=nhid, out_features=ntoken)
 
         self.rnn_type = rnn_type
