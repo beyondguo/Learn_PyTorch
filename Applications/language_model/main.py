@@ -10,8 +10,10 @@ from data import Corpus
 import model
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data', type=str, default='../../data/wikitext-2',
+parser.add_argument('--data', type=str, default='../../data/三国small',
                     help='location of the data corpus')
+parser.add_argument('--lang', type=str, default='zh',
+                    help='language fo the corpus')
 parser.add_argument('--model', type=str, default='LSTM',
                     help='type of recurrent net (RNN_TANH, RNN_RELU, LSTM, GRU, Transformer)')
 parser.add_argument('--emsize', type=int, default=200,
@@ -64,7 +66,7 @@ device = torch.device("cuda" if args.cuda else "cpu")
 # Load data
 ###############################################################################
 
-corpus = Corpus(args.data)
+corpus = Corpus(args.data, lang=args.lang)
 """
 Starting from sequential data, batchify arranges the dataset into columns.
 For instance, with the alphabet as the sequence and batch size 4, we'd get
