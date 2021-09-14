@@ -51,7 +51,11 @@ class RNN_Model(nn.Module):
         :return:
         """
         emb = self.dropout_layer(self.encoder(input))
-        output, hidden = self.rnn(emb, hidden)  # output: the hiddens of n tokens; hidden: the last hidden state (h_n)
+        # output: the hiddens of n tokens; hidden: the last hidden state (h_n)
+        output, hidden = self.rnn(emb, hidden)
+        # 注意输入decoder的是n个time steps的hidden，所以整个模型的输入的seq_len是多长，输出就会有多长
+        # 这也是seq2seq一般的做法，每个timestep的loss加起来组成整体的loss。
+        # 只不过这里的decoder就是一个简单的Linear，所以长度必须跟输入保持相同。如果单独一个RNN作为decoder，就可以长度不同了。
         decoded = self.decoder(output)
         decoded = decoded.view(-1, self.ntoken)
         return F.log_softmax(decoded, dim=1), hidden  # Why log(softmax(x))?
