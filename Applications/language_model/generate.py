@@ -34,7 +34,7 @@ parser.add_argument('--log-interval', type=int, default=100,
                     help='reporting interval')
 args = parser.parse_args()
 join_token = '' if args.lang == 'zh' else ' '
-torch.manual_seed(1)
+# torch.manual_seed(1)
 device = torch.device("cuda" if args.cuda else "cpu")
 
 if args.temperature < 1e-3:
